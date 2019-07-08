@@ -85,10 +85,6 @@ jobs:
     steps:
       - checkout
 
-      - add_ssh_keys:
-          fingerprints:
-            - "d3:c6:6a:a2:a3:fd:44:ab:07:81:a3:56:10:e4:04:92"
-
       - run:
           name: Merge Feature Branch onto Master
           command: |
