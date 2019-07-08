@@ -86,7 +86,7 @@ jobs:
       - checkout
 
       - add_ssh_keys:
-          fingerprints:
+          fingerprints: # Key refers to the team-avocado-01 github account
             - "fa:c7:b0:a0:8b:c0:6e:eb:ae:21:6b:27:c9:d2:91:47"
 
       - run:
