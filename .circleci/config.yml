@@ -1,0 +1,130 @@
+version: 2
+jobs:
+  test-master:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install pipenv
+            pipenv install
+
+      - save_cache:
+          key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - "~/.local/share/virtualenvs/"
+
+      - run:
+          name: Run Logic Tests (pytest)
+          command: |
+            mkdir test-reports
+            pipenv run pytest --junitxml=test-reports/junit.xml
+
+      - run:
+          name: Check Codestyle Guidelines (pycodestyle)
+          command: |
+            pipenv run pycodestyle --ignore=E902 --max-line-length=100 *.py
+
+      - store_test_results:
+          path: test-reports
+
+      - store_artifacts:
+          path: test-reports
+
+  test-feature:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install pipenv
+            pipenv install
+
+      - save_cache:
+          key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - "~/.local/share/virtualenvs/"
+
+      - run:
+          name: Run Logic Tests (pytest)
+          command: | # testBranch should be identical to the remote master, with feature/* merged
+            git checkout -b testBranch origin/master
+            git merge $CIRCLE_BRANCH
+            mkdir test-reports
+            pipenv run pytest --junitxml=test-reports/junit.xml
+
+      - run:
+          name: Check Codestyle Guidelines (pycodestyle)
+          command: |
+            pipenv run pycodestyle --ignore=E902 --max-line-length=100 *.py
+
+      - store_test_results:
+          path: test-reports
+
+      - store_artifacts:
+          path: test-reports
+
+  deploy:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - add_ssh_keys:
+          fingerprints:
+            - "fa:c7:b0:a0:8b:c0:6e:eb:ae:21:6b:27:c9:d2:91:47"
+
+      - run:
+          name: Merge Feature Branch onto Master
+          command: |
+            git checkout -b testBranch origin/master
+            git merge $CIRCLE_BRANCH
+            git push origin master
+
+      - run:  #creating dummy files to return build artifacts
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test-master:    # Checks that the master branch is currently not broken
+          filters:
+            branches:
+              only: master
+      - test-feature:   # Checks if a feature will break master, when merged into it
+          filters:
+            branches:
+              only: /feature/.*/
+      - deploy:         # We only deploy (to master) if we are testing a feature branch and pass
+          requires:
+          - test-feature
+          filters:
+            branches:
+              only: /feature/.*/
