@@ -1,5 +1,5 @@
 import pandas
 
 
-def readData():
+def doNothing():
     return 'Nothing to see here'

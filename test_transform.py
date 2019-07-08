@@ -1,5 +1,5 @@
 from transform import *
 
 
-def testTest():
+def doNothingTest():
     assert readData() == 'Nothing to see here'
