@@ -1,7 +1,7 @@
-version: 2
+version: 2.1
 
 orbs:
-  slack: circleci/slack@x.y.z
+  slack: circleci/slack@3.2.0
 
 jobs:
   test-master:
@@ -13,7 +13,7 @@ jobs:
       - slack/notify:
           message: "Testing final 'Master' branch..." # Optional: Enter your own message
           color: "#42e2f4" # Optional: Assign custom colors for each notification
-          webhook: "webhook" # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
+          webhook: "" # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
 
       - checkout
 
@@ -126,7 +126,7 @@ jobs:
           path: /tmp/artifacts
 
 workflows:
-  version: 2
+  version: 2.1
   test-deploy:
     jobs:
       - test-master:    # Checks that the master branch is currently not broken
