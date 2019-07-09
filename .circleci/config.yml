@@ -1,10 +1,20 @@
 version: 2
+
+orbs:
+  slack: circleci/slack@x.y.z
+
 jobs:
   test-master:
     docker:
       - image: circleci/python:3.7.3
     working_directory: ~/repo
     steps:
+
+      - slack/notify:
+        message: "Testing final 'Master' branch..." # Optional: Enter your own message
+        color: "#42e2f4" # Optional: Assign custom colors for each notification
+        webhook: "webhook" # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
+
       - checkout
 
       - restore_cache:
