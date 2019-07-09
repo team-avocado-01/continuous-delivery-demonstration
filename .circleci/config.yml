@@ -107,7 +107,7 @@ jobs:
     steps:
 
       - slack/notify:
-          message: "Attempting to deploy new feature...g"
+          message: "Attempting to deploy new feature..."
           color: "#FFA500"
 
       - checkout
