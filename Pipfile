@@ -10,6 +10,7 @@ pytest = "*"
 pycodestyle = "*"
 behave = "*"
 pandas = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.7"
