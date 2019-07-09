@@ -11,9 +11,9 @@ jobs:
     steps:
 
       - slack/notify:
-        message: "Testing final 'Master' branch..." # Optional: Enter your own message
-        color: "#42e2f4" # Optional: Assign custom colors for each notification
-        webhook: "webhook" # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
+          message: "Testing final 'Master' branch..." # Optional: Enter your own message
+          color: "#42e2f4" # Optional: Assign custom colors for each notification
+          webhook: "webhook" # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
 
       - checkout
 
