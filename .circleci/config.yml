@@ -38,9 +38,8 @@ jobs:
           path: test-reports
 
       - store_artifacts:
-          path:
-            - test-reports
-            - htmlcov
+          path: test-reports
+
 
   test-feature:
     docker:
