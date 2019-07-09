@@ -25,7 +25,9 @@ jobs:
           name: Run Logic Tests (pytest)
           command: |
             mkdir test-reports
-            pipenv run pytest --junitxml=test-reports/junit.xml
+            coverage run -m pipenv run pytest --junitxml=test-reports/junit.xml
+            coverage report
+            coverage html
 
       - run:
           name: Check Codestyle Guidelines (pycodestyle)
@@ -36,7 +38,9 @@ jobs:
           path: test-reports
 
       - store_artifacts:
-          path: test-reports
+          path:
+            - test-reports
+            - htmlcov
 
   test-feature:
     docker:
