@@ -11,8 +11,8 @@ jobs:
     steps:
 
       - slack/notify:
-          message: "Testing final 'Master' branch..." # Optional: Enter your own message
-          color: "#42e2f4" # Optional: Assign custom colors for each notification
+          message: "Testing final 'Master' branch..."
+          color: "#42e2f4"
 
       - checkout
 
@@ -51,12 +51,18 @@ jobs:
       - store_artifacts:
           path: test-reports
 
+      - slack/status
 
   test-feature:
     docker:
       - image: circleci/python:3.7.3
     working_directory: ~/repo
     steps:
+
+      - slack/notify:
+          message: "Testing prospective feature..."
+          color: "#42e2f4"
+
       - checkout
 
       - restore_cache:
@@ -92,11 +98,18 @@ jobs:
       - store_artifacts:
           path: test-reports
 
+      - slack/status
+
   deploy:
     docker:
       - image: circleci/python:3.7.3
     working_directory: ~/repo
     steps:
+
+      - slack/notify:
+          message: "Attempting to deploy new feature..."
+          color: "#42e2f4"
+
       - checkout
 
       - add_ssh_keys:
@@ -123,6 +136,8 @@ jobs:
 
       - store_artifacts:
           path: /tmp/artifacts
+
+      - slack/status
 
 workflows:
   version: 2.1
