@@ -25,8 +25,9 @@ jobs:
           name: Run Logic Tests (pytest)
           command: |
             mkdir test-reports
-            pipenv run coverage run -m pytest --junitxml=test-reports/junit.xml
-            pipenv run coverage report --omit=/home/circleci/.local/*
+            pipenv run coverage run -m  --omit=/home/circleci/.local/* \
+                                            pytest --junitxml=test-reports/junit.xml
+            pipenv run coverage report
             pipenv run coverage html
 
       - run:
