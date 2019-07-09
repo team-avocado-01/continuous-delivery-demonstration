@@ -12,7 +12,7 @@ jobs:
 
       - slack/notify:
           message: "Testing final 'Master' branch..."
-          color: "#FF4500"
+          color: "#FFA500"
 
       - checkout
 
@@ -61,7 +61,7 @@ jobs:
 
       - slack/notify:
           message: "Testing prospective feature..."
-          color: "#FF4500"
+          color: "#FFA500"
 
       - checkout
 
@@ -108,7 +108,7 @@ jobs:
 
       - slack/notify:
           message: "Attempting to deploy new feature...g"
-          color: "#FF4500"
+          color: "#FFA500"
 
       - checkout
 
