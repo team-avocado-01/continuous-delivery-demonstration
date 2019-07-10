@@ -22,7 +22,7 @@ def readData(filepath):
     return pandas.read_csv(filepath)
 
 
-# This is a function to find the mean 
+# This is a function to detect outliers using std deviation
 def getOutliers(df, n_std_dev, col):
     mean = df[col].mean()
     print(mean)
