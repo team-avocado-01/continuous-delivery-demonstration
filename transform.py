@@ -8,8 +8,8 @@ output_fp = './output/outliers.csv'
 
 
 # Input parameters
-num_std_devs = 2        # Number of standard deviations from the mean
-col_analyse = 'Age'     # Which column are we checking?
+num_std_devs = 99       # Number of standard deviations from the mean
+col_analyse = 'Age'     # Which column are we checking for outliers?
 
 
 # Does nothing
@@ -22,7 +22,7 @@ def readData(filepath):
     return pandas.read_csv(filepath)
 
 
-# This tests for outliers using std deviation and mean
+# TODO
 def getOutliers(df, n_std_dev, col):
     mean = df[col].mean()
     print(mean)
