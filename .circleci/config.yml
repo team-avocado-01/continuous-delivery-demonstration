@@ -82,13 +82,10 @@ jobs:
       - run:
           name: Run Logic Tests (pytest)
           command: |
-            git checkout master
-            git pull
-            git checkout test
-            git pull
-            git rebase -i master
-            git checkout master
-            git merge test
+            
+            ${CIRCLE_PROJECT_USERNAME}
+            git checkout -b test
+            git merge origin test
             mkdir test-reports
             pipenv run coverage run -m  --omit=/home/circleci/.local/* \
                                             pytest --junitxml=test-reports/junit.xml
