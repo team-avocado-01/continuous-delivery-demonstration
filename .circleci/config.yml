@@ -48,7 +48,8 @@ jobs:
           path: test-reports
 
       - slack/status:
-          success_message: Feature is ready to be reviewed
+          fail_only: true
+
 
   test-feature:
     docker:
@@ -94,7 +95,7 @@ jobs:
           path: test-reports
 
       - slack/status:
-          fail_only: true
+          success_message: Feature is ready to be reviewed
 
 workflows:
   version: 2.1
