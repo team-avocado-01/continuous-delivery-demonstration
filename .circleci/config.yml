@@ -83,7 +83,7 @@ jobs:
           name: Run Logic Tests (pytest)
           post: |
             if [[ -n "${CIRCLE_PR_NUMBER}" ]]
-          then
+        then
             # Update PR refs for testing.
             FETCH_REFS="+${CIRCLE_PR_BASE_BRANCH}:${CIRCLE_PR_BASE_BRANCH}"
             FETCH_REFS="${FETCH_REFS} +refs/pull/${CIRCLE_PR_NUMBER}/head:pr/${CIRCLE_PR_NUMBER}/head"
