@@ -84,7 +84,7 @@ jobs:
           command: |
             git checkout -b test
             git checkout master
-            git pull origin master
+            git pull
             git merge test
             mkdir test-reports
             ls
