@@ -1,4 +1,4 @@
-from src.transform import *
+from transform import *
 
 
 def test_doNothing():
