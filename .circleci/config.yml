@@ -82,7 +82,7 @@ jobs:
       - run:
           name: Run Logic Tests (pytest)
           command: |
-            git checkout -b testMergedBranch origin/master
+            git checkout origin/master
             git merge $CIRCLE_BRANCH
             mkdir test-reports
             pipenv run pytest --junitxml=test-reports/junit.xml
