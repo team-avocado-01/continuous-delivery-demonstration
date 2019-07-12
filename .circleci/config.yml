@@ -82,7 +82,6 @@ jobs:
       - run:
           name: Run Logic Tests (pytest)
           command: |
-            git config --local user.name 'jordanstachowicz'
             git checkout -b test
             git checkout master
             git pull origin master
