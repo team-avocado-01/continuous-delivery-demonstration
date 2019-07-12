@@ -83,6 +83,7 @@ jobs:
           name: Run Logic Tests (pytest)
           command: |
             mkdir test-reports
+            ls
             pipenv run pytest --junitxml=test-reports/junit.xml
 
       - run:
