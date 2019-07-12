@@ -5,4 +5,4 @@ issue.
 
 [![CircleCI](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration.svg?style=svg)](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration)
 
-v1.0.1
+v1.0.0
