@@ -23,7 +23,7 @@ jobs:
           name: Install Dependencies
           command: |
             sudo pip install pipenv
-            pipenv install
+            pipenv install '-e .'
 
       - run:
           name: Run Logic Tests (pytest)
@@ -83,8 +83,11 @@ jobs:
           name: Run Logic Tests (pytest)
           command: |
             mkdir test-reports
-            ls
-            pipenv run pytest --junitxml=test-reports/junit.xml
+            pipenv run coverage run -m  --omit=/home/circleci/.local/* \
+                                            pytest --junitxml=test-reports/junit.xml
+            pipenv run coverage report
+            pipenv run coverage html
+            pipenv run coverage xml -o test-reports/cover.xml
 
       - run:
           name: Check Codestyle Guidelines (pycodestyle)
