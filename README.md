@@ -1,5 +1,4 @@
-# Continuous Delivery
-## A demonstration.
+# Continuous Delivery Demonstration
 
 ## Introduction to project
 
@@ -13,7 +12,7 @@ This project is a full CI/CD pipeline which takes in transformed data and runs t
 
 This project includes a CI/CD workflow using CircleCI, and GitHub as the version control system.
 
-# Included:
+## Included:
 
 CircleCI config YAML file
 Input/Output data that is tested and deployed
@@ -23,7 +22,3 @@ Contributing.md file which explains setup and guidance to using the repo
 Pipfile which instructs packages to be built
   
 This is an open-source project, for contribution commit your changes and submit pull requests for an administrators review
-
-[![CircleCI](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration.svg?style=svg)](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration)
-
-v1.0.0
