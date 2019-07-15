@@ -16,9 +16,15 @@ def test_getOutliers():
     # Test an obvious outlier:
     # assert getOutliers(df1, 1, 'col1').equals(df1.iloc[5])
     # Test when there's no outliers:
+<<<<<<< HEAD
     # assert getOutliers(df1, 1, 'col2').equals(pd.DataFrame())
     # Test checking for tiny variations; sigma very small:
     # assert getOutliers(df1, 0.001, 'col3').equals(df1.iloc[2])
+=======
+    assert getOutliers(df1, 1, 'col2').equals(pd.DataFrame())
+    # Test checking for tiny variations; sigma very small:
+    assert getOutliers(df1, 0.001, 'col3').equals(df1.iloc[2])
+>>>>>>> 3bf49ca3c935af92a35640ba1e68eaed783aa123
 
 
 # Ensures we are checking for outliers a valid number of standard deviations from the mean
