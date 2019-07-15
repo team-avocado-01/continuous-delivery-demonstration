@@ -3,8 +3,8 @@ import sys
 
 
 # Filepaths
-input_fp = '../sample-data/input/titanic.csv'
-output_fp = '../sample-data/output/outliers.csv'
+input_fp = './sample-data/input/titanic.csv'
+output_fp = './sample-data/output/outliers.csv'
 
 
 # Input parameters
@@ -36,7 +36,7 @@ def getOutliers(df, n_std_dev, col):
 # Takes full titanic data and returns only survivors in the form:
 # name, sex, age
 def getSurvivors(df):
-    return df[['Name', 'Sex', 'Age']][df['Survived'] == 1]
+    return df[df['Survived'] == 1]
 
 
 # Saves the output to disk
