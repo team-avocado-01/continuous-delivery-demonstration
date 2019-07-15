@@ -12,6 +12,7 @@ behave = "*"
 pandas = "*"
 coverage = "*"
 packagename = {editable = true,path = "."}
+behave-pandas = "*"
 
 [requires]
 python_version = "3.7"
