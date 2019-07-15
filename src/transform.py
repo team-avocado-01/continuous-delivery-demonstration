@@ -12,7 +12,7 @@ num_std_devs = 1       # Number of standard deviations from the mean
 col_analyse = 'Age'     # Which column are we checking for outliers?
 
 
-# Does nothing
+# Does nothing - used for our dummy test
 def doNothing():
     return 'Nothing to see here'
 
