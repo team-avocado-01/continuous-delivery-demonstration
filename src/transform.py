@@ -26,9 +26,7 @@ def readData(filepath):
 # away from the mean; outliers.
 def getOutliers(df, n_std_dev, col):
     mean = df[col].mean()
-    print(mean)
     one_std_deviation = df[col].std()
-    print(one_std_deviation)
     q = n_std_dev * one_std_deviation
     df_max = df[df[col] > mean + q]
     df_min = df[df[col] < mean - q]
