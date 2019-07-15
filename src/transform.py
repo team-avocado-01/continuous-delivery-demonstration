@@ -3,8 +3,8 @@ import sys
 
 
 # Filepaths
-input_fp = '../input/titanic.csv'
-output_fp = '../output/outliers.csv'
+input_fp = '../sample-data/input/titanic.csv'
+output_fp = '../sample-data/output/outliers.csv'
 
 
 # Input parameters
