@@ -3,8 +3,8 @@ import sys
 
 
 # Filepaths
-input_fp = './input/titanic.csv'
-output_fp = './output/outliers.csv'
+input_fp = '../sample-data/input/titanic.csv'
+output_fp = '../sample-data/output/outliers.csv'
 
 
 # Input parameters
@@ -12,7 +12,7 @@ num_std_devs = 1       # Number of standard deviations from the mean
 col_analyse = 'Age'     # Which column are we checking for outliers?
 
 
-# Does nothing
+# Does nothing - used for our dummy test
 def doNothing():
     return 'Nothing to see here'
 
@@ -22,12 +22,11 @@ def readData(filepath):
     return pandas.read_csv(filepath)
 
 
-# this finds mean
+# this returns only those rows of a DF which are at least n_std_devs
+# away from the mean; outliers.
 def getOutliers(df, n_std_dev, col):
     mean = df[col].mean()
-    print(mean)
     one_std_deviation = df[col].std()
-    print(one_std_deviation)
     q = n_std_dev * one_std_deviation
     df_max = df[df[col] > mean + q]
     df_min = df[df[col] < mean - q]
