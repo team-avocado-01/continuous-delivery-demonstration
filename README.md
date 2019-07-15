@@ -22,3 +22,5 @@ Contributing.md file which explains setup and guidance to using the repo
 Pipfile which instructs packages to be built
   
 This is an open-source project, for contribution commit your changes and submit pull requests for an administrators review
+
+[![CircleCI](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration.svg?style=svg)](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration)
