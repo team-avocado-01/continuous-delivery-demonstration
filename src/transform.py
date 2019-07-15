@@ -34,6 +34,12 @@ def getOutliers(df, n_std_dev, col):
     return pandas.concat([df_max, df_min])
 
 
+# Takes full titanic data and returns only survivors in the form:
+# name, sex, age
+def getSurvivors(df):
+    return df[['Name', 'Sex', 'Age']][df['Survived'] == 1]
+
+
 # Saves the output to disk
 def storeOutliers(df, filepath):
     df.to_csv(filepath)
@@ -43,6 +49,7 @@ def storeOutliers(df, filepath):
 if __name__ == '__main__':
     print('testing')
     df = readData(input_fp)
+    print(getSurvivors(df))
     df = getOutliers(df, float(num_std_devs), str(col_analyse))
     storeOutliers(df, output_fp)
     print(df)
