@@ -1,12 +1,11 @@
-Feature: Reading input data
-  When we put in our input data, we should check that the resulting table
-  has the right shape.
+Scenario: Searching for outliers
+  Given a specific set of titanic passengers
+    |PassengerId|Survived|Pclass|Name |Sex|Age |Ticket|Fare|Cabin|Embarked|
+    |     1     |   1    |   1  |Alice| F | 22 |  A   |500 |  D  | Portsm |
+    |     2     |   0    |   2  |Bob  | M | 24 |  B5  |200 |  L  | London |
+    |     3     |   1    |   3  |Carol| F | 156 |  Y   |400 |  M  | Glasgow|
 
-  Scenario:
-    Given that we read in some Titanic data
-        | number     | other number |
-        | 0          | 4            |
-        | 0          | -5           |
-        | 0          | 0            |
-     When summed with any "<other number>"
-     Then we should return "<other number>"
+  When we search for those with statistically extraordinary age
+  Then we observe
+    |PassengerId|Survived|Pclass|Name |Sex|Age |Ticket|Fare|Cabin|Embarked|
+    |     3     |   1    |   3  |Carol| F | 156 |  Y   |400 |  M  | Glasgow|
