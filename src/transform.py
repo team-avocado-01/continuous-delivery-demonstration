@@ -35,6 +35,8 @@ def getOutliers(df, n_std_dev, col):
 
 # Takes full titanic data and returns only survivors in the form:
 # name, sex, age
+# TODO - actually use the specified form for output
+# Should write behavioral tests first, then demonstrate that they actually work
 def getSurvivors(df):
     return df[df['Survived'] == 1]
 
