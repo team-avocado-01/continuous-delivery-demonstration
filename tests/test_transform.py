@@ -19,7 +19,6 @@ def test_getOutliers():
     assert getOutliers(df1, 1, 'col2').empty
     assert getOutliers(df1, 999, 'col1').empty
     # Test checking for tiny variations; sigma very small:
-    assert getOutliers(df1, 0.001, 'col3').equals(df1[df1['col3'] == 1.9])
     assert getOutliers(df1, 0.001, 'col2').empty
 
 
