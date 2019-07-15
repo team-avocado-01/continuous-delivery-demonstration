@@ -1,5 +1,6 @@
 from behave import *
 from algebra import *
+import behave-pandas as bhpd
 
 
 @given('a specific set of titanic passengers')
