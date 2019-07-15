@@ -82,7 +82,7 @@ jobs:
       - run:
           name: Run Logic Tests (pytest)
           command: |
-            git checkout master
+            
             mkdir test-reports
             pipenv run coverage run -m  --omit=/home/circleci/.local/* \
                                             pytest --junitxml=test-reports/junit.xml
