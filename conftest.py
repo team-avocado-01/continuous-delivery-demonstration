@@ -3,15 +3,17 @@ import pandas as pd
 from src.transform import *
 
 
-def titanicData():
+@pytest.fixture
+def exampleData():
     """
     Setup code;
-    Creates a sample DataFrame, similar to our titanic dataset.
+    Creates an example DataFrame, similar to our sample titanic dataset
     """
 
     Name = ['Alice', 'Bob', 'Charlie', ' Dave', 'Emma']
     Age = ['25', '43', '65', '999', '-1']
     Sex = ['f', 'm', 'm', 'm', 'f']
     Embarked = ['C', 'S', 'P', 'Q', 'P']
-    df = pd.DataFrame(list(zip(Name, Age, Sex, Embarked)),
-                      columns=['Name', 'Age', 'Sex', 'Embarked'])
+    Survived = ['1', '1', '0', '0', '1']
+    return pd.DataFrame(list(zip(Name, Age, Sex, Embarked, Survived)),
+                        columns=['Name', 'Age', 'Sex', 'Embarked', 'Survived'])
