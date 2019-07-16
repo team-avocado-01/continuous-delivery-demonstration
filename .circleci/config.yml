@@ -26,10 +26,11 @@ jobs:
           command: |
             mkdir test-reports
             pipenv run coverage run -m  --omit=/home/circleci/.local/* \
-                                            pytest --junitxml=test-reports/junit.xml
+                                           pytest --junitxml=test-reports/junit.xml
             pipenv run coverage report
             pipenv run coverage html
             pipenv run coverage xml -o test-reports/cover.xml
+            
 
       - run:
           name: Check Codestyle Guidelines (pycodestyle)
@@ -72,17 +73,6 @@ jobs:
           key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - "~/.local/share/virtualenvs/"
-
-      - run:
-          name: Run Logic Tests (pytest)
-          command: |
-            
-            mkdir test-reports
-            pipenv run coverage run -m  --omit=/home/circleci/.local/* \
-                                            pytest --junitxml=test-reports/junit.xml
-            pipenv run coverage report
-            pipenv run coverage html
-            pipenv run coverage xml -o test-reports/cover.xml
 
       - run:
           name: Check Codestyle Guidelines (pycodestyle)
