@@ -24,3 +24,5 @@ Pipfile which instructs packages to be built
 This is an open-source project, for contribution commit your changes and submit pull requests for an administrators review
 
 [![CircleCI](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration.svg?style=svg)](https://circleci.com/gh/team-avocado-01/continuous-delivery-demonstration)
+
+[![codecov](https://codecov.io/gh/team-avocado-01/continuous-delivery-demonstration/branch/master/graph/badge.svg)](https://codecov.io/gh/team-avocado-01/continuous-delivery-demonstration)
