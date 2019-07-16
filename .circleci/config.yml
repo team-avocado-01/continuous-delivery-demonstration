@@ -77,7 +77,7 @@ jobs:
 
 workflows:
   version: 2.1
-  test-deploy:
+  test-build-deploy:
     jobs:
       - test-master:    # Checks that the master branch is currently not broken
           filters:
