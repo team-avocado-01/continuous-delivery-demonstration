@@ -84,7 +84,6 @@ jobs:
           name: report coverage and get badge
           command: |
 
-            pip install codecov
             coverage run tests.py
             codecov
             
