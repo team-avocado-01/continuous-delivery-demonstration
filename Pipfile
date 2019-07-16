@@ -11,6 +11,7 @@ pycodestyle = "*"
 behave = "*"
 pandas = "*"
 coverage = "*"
+coveralls = "*"
 coverage-badge = "*"
 packagename = {editable = true,path = "."}
 
