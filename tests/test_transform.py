@@ -26,10 +26,25 @@ import pandas as pd
 # def test_num_std_devs():
 #     assert num_std_devs > 0
 
-# @pytest.fixture
-def test_getOutliers():
+def test_getOutliers(exampleData):
     """
     getOutliers() extracts a subset of a DataFrame containing elements which are a specified no.
     of standard deviations from the mean.
     """
-    # Arrange, Act, Assert...
+    # Arrange (Our data is already in the necessary form...)
+    categories = exampleData.columns
+    std_dev_range = range(-5, 6)
+    outputs = []
+
+    # Act
+    for cat in categories:
+        for std_devs in std_dev_range:
+            outputs.append(getOutliers(exampleData, std_devs, cat))
+
+    print(outputs)
+
+    # Assert
+
+
+if __name__ == '__main__':
+    test_getOutliers(exampleData)
