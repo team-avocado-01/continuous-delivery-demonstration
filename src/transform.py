@@ -22,8 +22,8 @@ def readData(filepath):
     return pandas.read_csv(filepath)
 
 
-# this returns only those rows of a DF which are at least n_std_devs
-# away from the mean; outliers.
+# Returns only those rows of a DF which are at least n_std_devs
+# away from the mean for a given column; outliers.
 def getOutliers(df, n_std_dev, col):
     mean = df[col].mean()
     one_std_deviation = df[col].std()
