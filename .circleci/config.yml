@@ -12,10 +12,6 @@ jobs:
 
       - checkout
 
-      - slack/notify:
-          message: "Testing Master Branch"
-          color: "#FFA500"
-
       - restore_cache:
           key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
@@ -53,17 +49,15 @@ jobs:
       - store_artifacts:
           path: test-reports
 
-      - slack/status
+      - slack/status:
+          fail_only: true
+
 
   test-feature:
     docker:
       - image: circleci/python:3.7.3
     working_directory: ~/repo
     steps:
-
-      - slack/notify:
-          message: "Testing prospective feature..."
-          color: "#FFA500"
 
       - checkout
 
@@ -101,7 +95,8 @@ jobs:
       - store_artifacts:
           path: test-reports
 
-      - slack/status
+      - slack/status:
+          success_message: Feature is ready to be reviewed
 
 workflows:
   version: 2.1
