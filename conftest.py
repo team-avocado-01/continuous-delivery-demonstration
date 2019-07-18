@@ -7,7 +7,7 @@ from src.transform import *
 @pytest.fixture(params=[{"input": (0, "Age"),
                          "expected": list(range(1, 10))},
                         {"input": (1, "Age"),
-                         "expected": [7, 8]},
+                         "expected": [6, 7, 8]},
                         {"input": (2, "Age"),
                          "expected": [6]},
                         {"input": (0, "Fare"),
@@ -15,7 +15,11 @@ from src.transform import *
                         {"input": (1, "Fare"),
                          "expected": [2, 4, 7]},
                         {"input": (999, "Fare"),
-                         "expected": []}])
+                         "expected": []},
+                        {"input": (1.23, "Age"),
+                         "expected": [6, 7, 8]},
+                        {"input": (0.123, "Fare"),
+                         "expected": list(range(1, 10))}])
 def titanicKnownOutliers(request):
     """
     Setup code;
