@@ -16,10 +16,8 @@ def test_getOutliers(titanicKnownOutliers):
 
     # Act
     computed = getOutliers(d_frame, std_dev, cat_col).sort_values(by=['PassengerId'])
-    expected = d_frame[d_frame['PassengerId'].isin(titanicKnownOutliers['expected'])].sort_values(by=['PassengerId'])
-    pandas.set_option('display.max_columns', None)
-    print(computed)
-    print(expected)
+    expected = d_frame[d_frame['PassengerId'].isin(titanicKnownOutliers['expected'])]\
+        .sort_values(by=['PassengerId'])
 
     # Assert
     assert computed.equals(expected)
