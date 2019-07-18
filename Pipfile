@@ -11,6 +11,8 @@ pycodestyle = "*"
 behave = "*"
 pandas = "*"
 coverage = "*"
+packagename = {editable = true,path = "."}
+numpy = "*"
 
 [requires]
 python_version = "3.7"
