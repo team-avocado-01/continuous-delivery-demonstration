@@ -9,8 +9,8 @@ verify_ssl = true
 pytest = "*"
 pycodestyle = "*"
 behave = "*"
-pandas = "*"
 coverage = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.7"
