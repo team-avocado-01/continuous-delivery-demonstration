@@ -1,6 +1,5 @@
 from src.transform import *
 import pandas as pd
-import numpy as np
 
 
 def test_getOutliers(titanicKnownOutliers):
