@@ -3,11 +3,14 @@ import pandas as pd
 import numpy as np
 from src.transform import *
 
+
 """
 Define test cases here. Each dict has two key/value pairs:
     {"input": (Number_of_std_devs, Column_to_check),
     "output": [PassengerIDs, of, outlying, passengers]}
 """
+
+
 @pytest.fixture(params=[{"input": (0, "Age"),
                          "expected": list(range(1, 10))},
                         {"input": (1, "Age"),
