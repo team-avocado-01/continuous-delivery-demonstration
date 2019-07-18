@@ -30,7 +30,8 @@ def getOutliers(df, n_std_dev, col):
     q = n_std_dev * one_std_deviation
     df_max = df[df[col] >= mean + q]
     df_min = df[df[col] < mean - q]
-    return pandas.concat([df_max, df_min])
+    df_null = df[df[col].isnull()]
+    return pandas.concat([df_max, df_min, df_null])
 
 
 # Saves the output to disk
