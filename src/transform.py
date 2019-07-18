@@ -2,6 +2,8 @@ import pandas
 import sys
 
 
+__all__ = ['getOutliers']
+
 # Filepaths
 input_fp = '../sample-data/input/titanic.csv'
 output_fp = '../sample-data/output/outliers.csv'
