@@ -1,20 +1,31 @@
 import pytest
 import pandas as pd
+import numpy as np
 from src.transform import *
 
 
-@pytest.fixture
-def exampleData():
+@pytest.fixture(params=[{"input": (0, "Age"),
+                         "expected": list(range(1, 10))},
+                        {"input": (1, "Age"),
+                         "expected": [7, 8]},
+                        {"input": (2, "Age"),
+                         "expected": [6]},
+                        {"input": (0, "Fare"),
+                         "expected": list(range(1, 10))},
+                        {"input": (1, "Fare"),
+                         "expected": [2, 4, 7]},
+                        {"input": (999, "Fare"),
+                         "expected": []}])
+def titanicKnownOutliers(request):
     """
     Setup code;
-    Creates an example DataFrame, similar to our sample titanic dataset
-    """
+    Yields a set of known outliers and the corresponding parameters that are
+    expected to produce them from our titanic dataset.
 
-    #Name = ['Alice', 'Bob', 'Charlie', 'Dave', 'Emma']
-    Age = ['25', '43', '65', '999', '-1']
-    #Sex = ['f', 'm', 'm', 'm', 'f']
-    #Embarked = ['C', 'S', 'P', 'Q', 'P']
-    Survived = ['1', '1', '0', '0', '1']
-    # return pd.DataFrame(list(zip(Name, Age, Sex, Embarked, Survived)),
-    #                     columns=['Name', 'Age', 'Sex', 'Embarked', 'Survived'])
-    return pd.DataFrame(list(zip(Age, Survived)), columns=['Age', 'Survived'])
+    Inputs are tuples of (n_std_dev, column_name)
+    """
+    fp = './sample-data/input/titanic.csv'
+    print('Running setup code (if there actually was any...)')
+    request.param['data'] = pd.read_csv(fp)
+    yield request.param
+    print('Running teardown code (if there actually was any...)')
