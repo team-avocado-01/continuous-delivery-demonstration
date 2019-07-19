@@ -47,13 +47,12 @@ jobs:
       - store_artifacts:
           path: test-reports
 
-      # Only notify when action needs to be taken - reviewing feature or fixing master.
       - slack/status:
         fail_only: true
         only_for_branches: master
 
       - slack/status:
-        success_message: 'A new feature is ready for review.'
+        success_message: A new feature is ready for review.
         only_for_branches: ^(?!.*master).*$
 
 workflows:
