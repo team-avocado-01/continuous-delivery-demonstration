@@ -4,7 +4,7 @@ orbs:
   slack: circleci/slack@3.2.0
 
 jobs:
-  test-master:
+  test:
     docker:
       - image: circleci/python:3.7.3
     working_directory: ~/repo
@@ -47,43 +47,10 @@ jobs:
       - store_artifacts: &store-artifacts
           path: test-reports
 
-      - slack/status:
-          fail_only: true
-
-  test-feature:
-    docker:
-      - image: circleci/python:3.7.3
-    working_directory: ~/repo
-    steps:
-
-      - checkout
-
-      - restore_cache: *restore-cache
-
-      - run: *dep-install
-
-      - save_cache: *save-cache
-
-      - run: *logic-test
-
-      - run: *codestyle-test
-
-      - store_test_results: *store-results
-
-      - store_artifacts: *store-artifacts
-
-      - slack/status:
-          success_message: Feature is ready to be reviewed
+      - slack/status
 
 workflows:
   version: 2.1
-  test-build-deploy:
+  test-deploy:
     jobs:
-      - test-master:    # Checks that the master branch is currently not broken
-          filters:
-            branches:
-              only: master
-      - test-feature:   # Checks if a feature will break master, when merged into it
-          filters:
-            branches:
-              only: /feature/.*/
+      - test
