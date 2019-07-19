@@ -48,12 +48,12 @@ jobs:
           path: test-reports
 
       - slack/status:
-        fail_only: true
-        only_for_branches: master
+          fail_only: true
+          only_for_branches: master
 
       - slack/status:
-        success_message: A new feature is ready for review.
-        only_for_branches: ^(?!.*master).*$
+          success_message: A new feature is ready for review.
+          only_for_branches: ^(?!.*master).*$
 
 workflows:
   version: 2.1
