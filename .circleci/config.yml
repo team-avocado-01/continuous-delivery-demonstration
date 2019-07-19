@@ -4,7 +4,7 @@ orbs:
   slack: circleci/slack@3.2.0
 
 jobs:
-  test:
+  test-branch:
     docker:
       - image: circleci/python:3.7.3
     working_directory: ~/repo
@@ -12,16 +12,16 @@ jobs:
 
       - checkout
 
-      - restore_cache: &restore-cache
+      - restore_cache:
           key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
-      - run: &dep-install
+      - run:
           name: Install Dependencies
           command: |
             sudo pip install pipenv
             pipenv install '-e .'
 
-      - run: &logic-test
+      - run:
           name: Run Logic Tests (pytest)
           command: |
             mkdir test-reports
@@ -31,26 +31,33 @@ jobs:
             pipenv run coverage html
             pipenv run coverage xml -o test-reports/cover.xml
 
-      - run: &codestyle-test
+      - run:
           name: Check Codestyle Guidelines (pycodestyle)
           command: |
             pipenv run pycodestyle --ignore=E902 --max-line-length=100 *.py
 
-      - save_cache: &save-cache
+      - save_cache:
           key: dependencies-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - "~/.local/share/virtualenvs/"
 
-      - store_test_results: &store-results
+      - store_test_results:
           path: test-reports
 
-      - store_artifacts: &store-artifacts
+      - store_artifacts:
           path: test-reports
 
-      - slack/status
+      # Only notify when action needs to be taken - reviewing feature or fixing master.
+      - slack/status:
+        fail_only: true
+        only_for_branches: master
+
+      - slack/status:
+        success_message: 'A new feature is ready for review.'
+        only_for_branches: ^(?!.*master).*$
 
 workflows:
   version: 2.1
   test-deploy:
     jobs:
-      - test
+      - test-branch
