@@ -11,6 +11,18 @@ Define test cases here. Each dict has two key/value pairs:
 """
 
 
+@pytest.fixture()
+def titanicSamples(request):
+    """
+    Setup code;
+    Yields a sample dataset detailing survivors/unfortunates on RMS Titanic
+    """
+    fp = './sample-data/input/titanic.csv'
+    print('Running setup code (if there actually was any...)')
+    yield pd.read_csv(fp)
+    print('Running teardown code (if there actually was any...)')
+
+
 @pytest.fixture(params=[{"input": (0, "Age"),
                          "expected": list(range(1, 10))},
                         {"input": (1, "Age"),
