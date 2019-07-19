@@ -1,27 +1,34 @@
 from src.transform import *
 import pandas as pd
+import numpy as np
+import pytest
 
 
-# Dummy test; should pass regardless of how good our code is
-def test_doNothing():
-    assert doNothing() == 'Nothing to see here'
+@pytest.mark.parametrize("input,expected", [((0, "Age"), list(range(1, 10))),
+                                            ((1, "Age"), [6, 7, 8]),
+                                            ((2, "Age"), [6]),
+                                            ((0, "Fare"), list(range(1, 10))),
+                                            ((1, "Fare"), [2, 4, 7]),
+                                            ((999, "Fare"), []),
+                                            ((1.23, "Age"), [6, 7, 8]),
+                                            ((0.123, "Fare"), list(range(1, 10)))])
+def test_getOutliers(input, expected, titanicSamples):
+    """
+    getOutliers() produces a subset of a DataFrame containing elements which are at least
+    a specified no. of standard deviations from the mean. We compare computed outliers to
+    known-correct outliers for a range of inputs, for our sample dataset.
 
+    input, tuple: (num_std_devs, column_to_check)
+    expected, list: [list_of, passenger_ids, present]
+    """
+    # Arrange
+    std_dev = input[0]
+    cat_col = input[1]
 
-# Tests whether the getOutliers function correctly does so
-def test_getOutliers():
-    data1 = {'col1': [1, 1, 1, 1, 1, 99999999],
-             'col2': [1, 1, 1, 1, 1, 1],
-             'col3': [2, 2, 1.9, 2, 2, 2]}
-    df1 = pd.DataFrame(data=data1)
-    # Test an obvious outlier:
-    assert getOutliers(df1, 1, 'col1').equals(df1[df1['col1'] == 99999999])
-    # Test when there's no outliers:
-    assert getOutliers(df1, 1, 'col2').empty
-    assert getOutliers(df1, 999, 'col1').empty
-    # Test checking for tiny variations; sigma very small:
-    assert getOutliers(df1, 0.001, 'col2').empty
+    # Act
+    computed = getOutliers(titanicSamples, std_dev, cat_col).sort_values(by=['PassengerId'])
+    expected = titanicSamples[titanicSamples['PassengerId'].isin(expected)]\
+        .sort_values(by=['PassengerId'])
 
-
-# Ensures we are checking for outliers a valid number of standard deviations from the mean
-def test_num_std_devs():
-    assert num_std_devs > 0
+    # Assert
+    assert computed.equals(expected)
