@@ -33,7 +33,7 @@ def getOutliers(df, n_std_dev, col):
     return pandas.concat([df_max, df_min])
 
 
-# Saves the output to disk
+# Saves the input to disk
 def storeOutliers(df, filepath):
     df.to_csv(filepath)
 
