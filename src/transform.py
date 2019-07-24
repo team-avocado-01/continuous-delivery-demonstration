@@ -8,7 +8,7 @@ output_fp = '../sample-data/output/outliers.csv'
 
 
 # Input parameters
-num_std_devs = 1       # Number of standard deviations from the mean
+num_std_devs = 0       # Number of standard deviations from the mean
 col_analyse = 'Age'     # Which column are we checking for outliers?
 
 
@@ -33,7 +33,7 @@ def getOutliers(df, n_std_dev, col):
     return pandas.concat([df_max, df_min])
 
 
-# Saves the input to disk
+# Saves the output to disk
 def storeOutliers(df, filepath):
     df.to_csv(filepath)
 
